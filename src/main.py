@@ -1,5 +1,5 @@
+#web server imports
 from fastapi import (FastAPI , Request)
-
 from fastapi import templating
 from fastapi.exceptions import ResponseValidationError
 from fastapi.responses import HTMLResponse
@@ -31,6 +31,9 @@ def main (request : Request , row = None) :
 
 
 
+@app.get("/health") 
+def health () : 
+    return 200
 
 
 
@@ -41,4 +44,5 @@ def main (request : Request , row = None) :
 
 
 if __name__ == "__main__" : 
+    mainCtrl.CTL().qr()
     uvicorn.run("main:app" , host="0.0.0.0" , port=8001 , reload=True)
