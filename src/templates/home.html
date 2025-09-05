@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>prictl</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gruvbox dark background */
+    body {
+      background: linear-gradient(135deg, #1d2021, #282828, #3c3836);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen text-white font-sans">
+
+  <!-- Header / Title -->
+  <header class="text-center mt-8">
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">prictl</h1>
+  </header>
+
+  <!-- Buttons (~70% height) -->
+  <main class="flex flex-col-reverse sm:flex-row items-center justify-center gap-8 flex-grow" style="height:70vh;">
+    <!-- Previous Button -->
+    <button data-row="prev" onclick="send(this)"
+      class="flex items-center justify-center bg-[#3c3836] hover:bg-[#504945] text-white font-bold py-24 px-32 rounded-3xl shadow-2xl text-5xl sm:text-6xl w-72 sm:w-96 transition-transform transform hover:scale-105">
+      Previous
+    </button>
+
+    <!-- Next Button -->
+    <button data-row="next" onclick="send(this)"
+      class="flex items-center justify-center bg-[#b16286] hover:bg-[#d3869b] text-white font-bold py-24 px-32 rounded-3xl shadow-2xl text-5xl sm:text-6xl w-72 sm:w-96 transition-transform transform hover:scale-105">
+      Next
+    </button>
+  </main>
+
+  <!-- Footer Links -->
+  <footer class="text-center mb-8 space-x-6">
+    <a href="https://github.com/mateo-rfz/prictl" class="hover:text-gray-300 transition">GitHub</a>
+  </footer>
+
+  <script>
+    async function send(button) {
+      try {
+        const row = button.getAttribute('data-row'); 
+
+        const response = await fetch(`/?row=${encodeURIComponent(row)}`, {
+          method: 'GET'
+        });
+
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+
+</body>
+</html>
+
