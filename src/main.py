@@ -44,5 +44,5 @@ def health () :
 
 
 if __name__ == "__main__" : 
-    mainCtrl.CTL().qr()
-    uvicorn.run("main:app" , host="0.0.0.0" , port=8001 , reload=True)
+    mainCtrl.CTL().qrCreator(servicePort=10001)
+    uvicorn.run("main:app" , host="0.0.0.0" , port=10001 , reload=True)
