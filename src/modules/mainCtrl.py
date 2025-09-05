@@ -1,7 +1,9 @@
-import keyboard
-
-
-
+import pyautogui
+import tempfile 
+import qrcode
+import webbrowser
+import os
+import socket
 
 
 
@@ -10,12 +12,37 @@ class CTL :
         pass
 
 
-
-
-
-
     def pressKey (self , row) : 
         if row == "next" : 
-            keyboard.send("right")
+            pyautogui.press("right")
         else : 
-            keyboard.send("left")
+            pyautogui.press("left")
+
+
+
+    def qr (self) :
+        try : 
+            path = tempfile.gettempdir()
+            url = f"http://{getPrivateIp()}:8001"
+
+            file_path = os.path.join(path, f"prictl.png")
+
+            q = qrcode.make(url)
+            q.save(file_path)
+            webbrowser.open(file_path)
+
+            return True
+
+        except Exception as e : 
+            return False
+
+
+
+    def getPrivateIp(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            s.connect(("8.8.8.8", 80))
+            ip = s.getsockname()[0]
+        finally:
+            s.close()
+        return ip
