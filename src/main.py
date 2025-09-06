@@ -11,6 +11,7 @@ import uvicorn
 
 #local modules 
 from modules import mainCtrl
+from modules import infoPageGenerator
 
 
 
@@ -44,5 +45,6 @@ def health () :
 
 
 if __name__ == "__main__" : 
+    infoPageGenerator.Generaotr()
     mainCtrl.CTL().qrCreator(servicePort=10001)
     uvicorn.run("main:app" , host="0.0.0.0" , port=10001 , reload=True)
