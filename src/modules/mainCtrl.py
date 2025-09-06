@@ -16,6 +16,9 @@ import os
 # use for get local ip address
 import socket
 
+# use for generate pincode
+import random
+
 
 
 class CTL : 
@@ -77,3 +80,40 @@ class CTL :
         finally:
             s.close()
         return ip
+
+
+
+
+
+    def randomCodeGenerator (self) : 
+        code = ""
+        for _ in range(4) : 
+            code = code + str(random.randint(0 , 9))
+
+        path = tempfile.gettempdir()
+        path = os.path.join(path, "priper_code.txt")
+        with open(path , "w") as file : 
+            file.write(code)
+
+
+        return code
+
+
+
+
+
+    def readCode (self) : 
+        try :   
+            path = tempfile.gettempdir()
+            path = os.path.join(path, "priper_code.txt")
+
+            with open(path , "r") as file : 
+               file = file.read() 
+
+            return file
+
+        except Exception as e : 
+            return None
+
+
+        
