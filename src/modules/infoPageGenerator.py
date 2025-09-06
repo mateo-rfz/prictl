@@ -1,5 +1,11 @@
+# use for find temp dir on systems
 import tempfile
+
+# use for combine filename and path
 import os
+
+#local import 
+from modules import loger
 
 
 
@@ -7,17 +13,23 @@ import os
 
 class Generaotr  : 
     def __init__ (self , code : str = "1111") :
+        self.log = loger.Loger()
+
+        # read raw pageInfo from templates/info.html
         self.page = self.__readInfoPageFile()
+       
+        # pincode for auth
         self.code = code
-
-        path = tempfile.gettempdir()
-        self.path = os.path.join(path, "prictlInfo.html") 
-
-
-
-        self.qrPath = os.path.join(path , "prictl.png")
         
-        self.__gnr()
+
+        tempDirPath = tempfile.gettempdir()
+        self.tempDirPath = os.path.join(tempDirPath, "prictlInfo.html") 
+
+
+
+        self.qrPath = os.path.join(tempDirPath , "prictl.png")
+        
+        self.__generator()
         self.__saveReadyToUseInfoPage()
 
  
@@ -25,24 +37,36 @@ class Generaotr  :
 
 
     def __readInfoPageFile (self) : 
-        with open("templates/info.html" , "r") as file : 
-            file = file.read()
+        try : 
+            with open("templates/info.html" , "r") as file : 
+                file = file.read()
 
-        return file
+            return file
+
+        except Exception as e :
+            self.log.add("ERROR IN READ RAW INFO PAGE" , e)
+            return ""
 
 
 
     def __saveReadyToUseInfoPage (self) : 
-        with open(self.path , "w") as file : 
-            file.write(self.page)
+        try : 
+            with open(self.tempDirPath , "w") as file : 
+                file.write(self.page)
+
+            return True
+
+        except Exception as e : 
+            self.log.add("ERROR IN MAKE READY TO USE PAGE INFO" , e)
+            return False
         
 
 
 
 
 
-
-    def __gnr (self) :
+    
+    def __generator (self) :
         self.page = self.page.replace("%%%%" , self.code).replace("&&&&" , self.qrPath)
 
 
