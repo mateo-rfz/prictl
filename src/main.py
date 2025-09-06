@@ -1,5 +1,5 @@
 #web server imports
-from fastapi import (FastAPI , Request)
+from fastapi import (FastAPI , Request , Response , Cookie)
 from fastapi import templating
 from fastapi.exceptions import ResponseValidationError
 from fastapi.responses import HTMLResponse
@@ -15,20 +15,39 @@ from modules import infoPageGenerator
 
 
 
+
+ctl = mainCtrl.CTL()
+
+
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
 
-
 @app.get("/")
-def main (request : Request , row = None) : 
-    if row == None : 
-        return templates.TemplateResponse("home.html" , {"request":request})
+def main(
+    request: Request,
+    code_cookie: str = Cookie(None, alias="code"),
+    row: str = None,
+    code: str = None
+):
+    pcode = ctl.readCode()
 
-    if row == "next" or row == "prev":
-        mainCtrl.CTL().pressKey(row)
-    
+    if code == pcode:
+        response = templates.TemplateResponse("home.html", {"request": request})
+        response.set_cookie(key="code", value=pcode, max_age=100000, path="/")
+        return response
+
+
+    if code_cookie == pcode:
+        if row in ("next", "prev"):
+            ctl.pressKey(row)
+        return templates.TemplateResponse("home.html", {"request": request})
+
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
 
 
 
@@ -44,7 +63,9 @@ def health () :
 
 
 
-if __name__ == "__main__" : 
-    infoPageGenerator.Generaotr()
-    mainCtrl.CTL().qrCreator(servicePort=10001)
-    uvicorn.run("main:app" , host="0.0.0.0" , port=10001 , reload=True)
+if __name__ == "__main__" :
+    ctl.randomCodeGenerator()
+    pcode = ctl.readCode()
+    infoPageGenerator.Generaotr(pcode)
+    ctl.qrCreator(servicePort=10003)
+    uvicorn.run("main:app" , host="0.0.0.0" , port=10003 , reload=False)
