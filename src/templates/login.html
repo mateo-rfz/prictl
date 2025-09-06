@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>prictl</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gruvbox dark background */
+    body {
+      background: linear-gradient(135deg, #1d2021, #282828, #3c3836);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen text-white font-sans">
+
+  <!-- Header / Title -->
+  <header class="text-center mt-12">
+    <h1 class="text-5xl font-extrabold tracking-tight">prictl</h1>
+  </header>
+
+  <!-- PIN Input Form -->
+  <main class="flex flex-col items-center justify-center flex-grow mt-16">
+    <form action="/" method="GET" class="flex flex-col items-center gap-6">
+      <input id="pin" name="code" type="text" maxlength="4" pattern="\d{4}" placeholder="1234"
+             class="text-4xl sm:text-5xl font-mono bg-[#3c3836] px-8 py-6 rounded-xl shadow-2xl text-center w-48 sm:w-64">
+      <button type="submit"
+              class="bg-[#b16286] hover:bg-[#d3869b] text-white font-bold py-4 px-12 rounded-xl shadow-lg text-2xl transition-transform transform hover:scale-105">
+        Submit
+      </button>
+    </form>
+  </main>
+
+  <!-- Footer Links -->
+  <footer class="text-center mb-8 mt-12">
+    <a href="https://github.com/mateo-rfz/prictl" class="hover:text-gray-300 transition">GitHub</a>
+  </footer>
+
+</body>
+</html>
+
