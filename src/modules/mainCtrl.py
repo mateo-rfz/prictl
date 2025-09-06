@@ -53,7 +53,10 @@ class CTL :
 
             q = qrcode.make(url)
             q.save(file_path)
-            webbrowser.open(file_path)
+
+
+            infoPagePath = os.path.join(path, f"prictlInfo.html")
+            webbrowser.open(infoPagePath)
 
             return True
 
