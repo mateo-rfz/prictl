@@ -23,12 +23,32 @@ prictl is a tool used to control slides in presentations from other devices such
 
 ---
 
-## Installation
+## Installation 
 
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package manager)
+
+> ⚠️ Depending on your system, you may need to use `pip3` instead of `pip` and `python3` instead of `python`.
+
+---
+
+### Quick Start
+If you just want to get started quickly:
+```bash
+git clone https://github.com/mateo-rfz/prictl.git
+cd prictl/src
+pip install -r requirements.txt
+python main.py
+```
+
+---
+
+### For Windows
 1. Make sure Python is installed on your primary device:  
    [Download Python](https://www.python.org/downloads/)
 
-2. Install dependencies:  
+2. Open terminal (CMD/PowerShell) in the `prictl` directory and install dependencies:  
    ```bash
    pip install -r src/requirements.txt
    ```
@@ -38,6 +58,82 @@ prictl is a tool used to control slides in presentations from other devices such
    cd src
    python main.py
    ```
+
+---
+
+### For macOS
+1. Make sure Python is installed on your device.  
+   You can install it with [Homebrew](https://brew.sh/):  
+
+   ```bash
+   brew install python3
+   ```
+
+2. Install dependencies:  
+   ```bash
+   pip3 install -r src/requirements.txt
+   ```
+
+3. Run prictl:  
+   ```bash
+   cd src
+   python3 main.py
+   ```
+
+---
+
+### For Linux 
+1. Make sure Python is installed on your primary device
+
+Install Python on your distro:  
+
+Debian/Ubuntu:
+```bash 
+sudo apt install python3
+```
+
+Arch:
+```bash 
+sudo pacman -S python3 
+```
+
+RedHat/Fedora:
+```bash 
+sudo dnf install python3 
+```
+
+2. Open terminal in the `prictl` directory and install dependencies:  
+```bash 
+pip install -r src/requirements.txt
+```
+
+3. Run prictl: 
+```bash 
+python3 main.py
+```
+
+---
+
+### For BSD
+1. Make sure Python is installed on your primary device
+
+Install Python on your distro:  
+
+FreeBSD/NetBSD/OpenBSD:
+```bash 
+sudo pkg install python3
+```
+
+2. Open terminal in the `prictl` directory and install dependencies:  
+```bash 
+pip install -r src/requirements.txt
+```
+
+3. Run prictl: 
+```bash 
+python3 main.py
+```
+
 
 ---
 
@@ -55,7 +151,7 @@ prictl is a tool used to control slides in presentations from other devices such
 ---
 
 ## Configuration (Optional)
-- Default HTTP port: `8000` (can be changed in `main.py` if needed)
+- Default HTTP port: `10001` (can be changed in `main.py` if needed)
 - Future options for customizing slide controls
 
 ---
