@@ -18,8 +18,12 @@ from modules import infoPageGenerator
 
 
 
+# import for exit 
+import os
+import signal
 
-ctl = mainCtrl.CTL()
+
+ctl = mainCtrl.CTL(servicePort=10001)
 
 
 
@@ -66,6 +70,22 @@ def main(request: Request , code_cookie: str = Cookie(None, alias="code") , row:
 
 
 
+@app.get("/exit") 
+def exit () : 
+    pid = os.getpid()
+    if os.name == "posix" : 
+        os.kill(pid , signal.SIGINT)
+
+    else : 
+        os.kill(pid , signal.CTRL_C_EVENT)
+    
+    return "OK"
+
+
+
+
+
+
 @app.get("/health") 
 def health () : 
     return 200
@@ -79,5 +99,5 @@ if __name__ == "__main__" :
     ctl.randomCodeGenerator()
     pcode = ctl.readCode()
     infoPageGenerator.Generaotr(str(pcode))
-    ctl.qrCreator(servicePort=10001)
+    ctl.qrCreator()
     uvicorn.run("main:app" , host="0.0.0.0" , port=10001 , reload=False)
