@@ -1,2 +1,6 @@
 fastapi
+jinja2
+uvicorn
+pillow
+qrcode
 pyautogui
