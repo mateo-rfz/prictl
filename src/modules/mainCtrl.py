@@ -27,8 +27,9 @@ from modules import loger
 
 
 class CTL : 
-    def __init__ (self) : 
+    def __init__ (self , servicePort : int = 10001) : 
         self.log = loger.Loger()
+        self.servicePort = servicePort
 
 
 
@@ -61,7 +62,7 @@ class CTL :
 
 
 
-    def qrCreator (self , servicePort : int = 10001) :
+    def qrCreator (self) :
         """
         Generate a QR code for a webpage URL based on the local IP and given port,
         save it as 'prictl.png' in the system temporary directory, 
@@ -70,7 +71,7 @@ class CTL :
 
         try : 
             tempDirPath = tempfile.gettempdir()
-            url = f"http://{self.getPrivateIp()}:{servicePort}"
+            url = f"http://{self.getPrivateIp()}:{self.servicePort}"
 
             qrCodePath = os.path.join(tempDirPath, f"prictl.png")
             

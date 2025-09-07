@@ -4,9 +4,11 @@ import tempfile
 # use for combine filename and path
 import os
 
+
+
 #local import 
 from modules import loger
-
+from modules import mainCtrl
 
 
 
@@ -20,7 +22,7 @@ class Generaotr  :
        
         # pincode for auth
         self.code = code
-        
+        self.exitUrl = f"http://{mainCtrl.CTL().getPrivateIp()}:{mainCtrl.CTL().servicePort}/exit"
 
         tempDirPath = tempfile.gettempdir()
         self.tempDirPath = os.path.join(tempDirPath, "prictlInfo.html") 
@@ -67,7 +69,7 @@ class Generaotr  :
 
     
     def __generator (self) :
-        self.page = self.page.replace("%%%%" , self.code).replace("&&&&" , self.qrPath)
+        self.page = self.page.replace("%%%%" , self.code).replace("&&&&" , self.qrPath).replace("LINK" , self.exitUrl)
 
 
 
