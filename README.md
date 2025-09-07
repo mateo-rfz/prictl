@@ -43,9 +43,12 @@ prictl is a tool used to control slides in presentations from other devices such
 
 ## Usage Examples
 
-- Example 1: `pic link 1`
-- Example 2: `pic link 2`
-- Example 3: `pic link 3`
+- Example 1: 
+![screen1](pictures/screenShots/screenShot1.png)
+- Example 2:
+![screen2](pictures/screenShots/screenShot2.png)
+- Example 3:
+![screen3](pictures/screenShots/screenShot3.png)
 
 > Once the server is running on your main device, open the web page on another device connected to the same local network to control your slides.
 
