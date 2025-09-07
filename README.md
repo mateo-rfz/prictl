@@ -1,4 +1,4 @@
-![logo](https://github.com/mateo-rfz/prictl/tree/master/pictures/logo.png)
+![logo](pictures/logo.png)
 
 
 # prictl
